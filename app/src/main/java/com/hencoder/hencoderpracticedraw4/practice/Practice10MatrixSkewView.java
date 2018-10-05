@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.support.annotation.Nullable;
@@ -38,7 +39,21 @@ public class Practice10MatrixSkewView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+
+        Matrix matrix = new Matrix();
+
+        matrix.reset();
+        matrix.postSkew(0,0.5f);
+        canvas.save();
+        canvas.concat(matrix);
         canvas.drawBitmap(bitmap, point1.x, point1.y, paint);
+        canvas.restore();
+
+        matrix.reset();
+        matrix.postSkew(-0.5f,0);
+        canvas.save();
+        canvas.concat(matrix);
         canvas.drawBitmap(bitmap, point2.x, point2.y, paint);
+        canvas.restore();
     }
 }

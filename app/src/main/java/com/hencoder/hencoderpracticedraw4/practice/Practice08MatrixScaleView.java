@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.support.annotation.Nullable;
@@ -38,7 +39,24 @@ public class Practice08MatrixScaleView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        int w = bitmap.getWidth() / 2;
+        int h = bitmap.getHeight() / 2;
+
+        Matrix matrix = new Matrix();
+
+        matrix.reset();
+        matrix.postScale(1.3f, 1.3f, point1.x + w, point1.y + h);
+        canvas.save();
+        canvas.concat(matrix);
         canvas.drawBitmap(bitmap, point1.x, point1.y, paint);
+        canvas.restore();
+
+
+        canvas.save();
+        matrix.reset();
+        matrix.postScale(0.6f, 1.5f, point2.x + w, point2.y + h);
+        canvas.concat(matrix);
         canvas.drawBitmap(bitmap, point2.x, point2.y, paint);
+        canvas.restore();
     }
 }
